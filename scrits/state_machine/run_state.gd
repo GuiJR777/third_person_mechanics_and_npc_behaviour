@@ -3,6 +3,8 @@ class_name RunState extends State
 
 func enter():
 	PlayerGlobals.current_state = self.name
+	owner.jump_count = 0
+	owner.animation_playback.travel(self.name)
 	owner.speed = owner.default_speed * 2
 
 

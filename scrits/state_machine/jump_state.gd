@@ -3,6 +3,7 @@ class_name JumpState extends State
 
 func enter():
 	PlayerGlobals.current_state = self.name
+	owner.animation_playback.travel(self.name)
 
 
 func update(delta):
