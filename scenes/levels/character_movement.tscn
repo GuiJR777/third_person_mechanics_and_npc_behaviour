@@ -1,0 +1,94 @@
+[gd_scene load_steps=15 format=3 uid="uid://6d1lpf1ied3y"]
+
+[ext_resource type="Texture2D" uid="uid://cv6e2pf0vknw4" path="res://addons/kenney_prototype_textures/dark/texture_07.png" id="1_steb7"]
+[ext_resource type="PackedScene" uid="uid://fwbm68it4ut1" path="res://scenes/characters/capsule_player.tscn" id="2_c184j"]
+[ext_resource type="PackedScene" uid="uid://bi84i8fq0pkqa" path="res://scenes/UI/hud.tscn" id="3_ud43f"]
+[ext_resource type="PackedScene" uid="uid://bbutpxxj74flx" path="res://scenes/templates/enemy_template.tscn" id="4_4kspd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_po6bc"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_dcpdq"]
+sky_material = SubResource("ProceduralSkyMaterial_po6bc")
+
+[sub_resource type="Environment" id="Environment_ju8xd"]
+background_mode = 2
+sky = SubResource("Sky_dcpdq")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idul1"]
+albedo_texture = ExtResource("1_steb7")
+uv1_triplanar = true
+uv2_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_iof4q"]
+material = SubResource("StandardMaterial3D_idul1")
+size = Vector3(50, 0.3, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_58set"]
+size = Vector3(50, 0.3, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5s6n"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.015
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8fs7"]
+next_pass = SubResource("StandardMaterial3D_x5s6n")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.231373, 1, 0.407843, 1)
+metallic_specular = 0.0
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_cr20a"]
+material = SubResource("StandardMaterial3D_u8fs7")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sxa6u"]
+points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1)
+
+[node name="CharacterMovement" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ju8xd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+mesh = SubResource("BoxMesh_iof4q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/Floor"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_58set")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.84709, 1.4107, -7.51225)
+collision_layer = 2
+collision_mask = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/RigidBody3D"]
+mesh = SubResource("BoxMesh_cr20a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_sxa6u")
+
+[node name="CapsulePlayer" parent="." instance=ExtResource("2_c184j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96201, 0)
+
+[node name="HUD" parent="." instance=ExtResource("3_ud43f")]
+
+[node name="EnemyTemplate" parent="." instance=ExtResource("4_4kspd")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -21.3941)

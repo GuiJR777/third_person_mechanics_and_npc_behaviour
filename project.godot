@@ -1,0 +1,123 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+_global_script_classes=[{
+"base": "PlayerTemplate",
+"class": &"CapsulePlayer",
+"language": &"GDScript",
+"path": "res://scrits/characters/capsule_player.gd"
+}, {
+"base": "CharacterBody3D",
+"class": &"EnemyTemplate",
+"language": &"GDScript",
+"path": "res://scrits/templates/enemy_template.gd"
+}, {
+"base": "State",
+"class": &"FallState",
+"language": &"GDScript",
+"path": "res://scrits/state_machine/fall_state.gd"
+}, {
+"base": "State",
+"class": &"IdleState",
+"language": &"GDScript",
+"path": "res://scrits/state_machine/idle_state.gd"
+}, {
+"base": "State",
+"class": &"JumpState",
+"language": &"GDScript",
+"path": "res://scrits/state_machine/jump_state.gd"
+}, {
+"base": "CharacterBody3D",
+"class": &"PlayerTemplate",
+"language": &"GDScript",
+"path": "res://scrits/templates/player_template.gd"
+}, {
+"base": "State",
+"class": &"RunState",
+"language": &"GDScript",
+"path": "res://scrits/state_machine/run_state.gd"
+}, {
+"base": "Node",
+"class": &"State",
+"language": &"GDScript",
+"path": "res://scrits/state_machine/state.gd"
+}, {
+"base": "Node",
+"class": &"StateMachine",
+"language": &"GDScript",
+"path": "res://scrits/state_machine/state_machine.gd"
+}, {
+"base": "State",
+"class": &"WalkState",
+"language": &"GDScript",
+"path": "res://scrits/state_machine/walk_state.gd"
+}]
+_global_script_class_icons={
+"CapsulePlayer": "",
+"EnemyTemplate": "",
+"FallState": "",
+"IdleState": "",
+"JumpState": "",
+"PlayerTemplate": "",
+"RunState": "",
+"State": "",
+"StateMachine": "",
+"WalkState": ""
+}
+
+[application]
+
+config/name="third_person_tests"
+run/main_scene="res://scenes/levels/character_movement.tscn"
+config/features=PackedStringArray("4.0", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerGlobals="*res://scrits/globals/player_globals.gd"
+
+[input]
+
+north={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"unicode":0,"echo":false,"script":null)
+]
+}
+south={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"unicode":0,"echo":false,"script":null)
+]
+}
+east={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"unicode":0,"echo":false,"script":null)
+]
+}
+weast={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"unicode":0,"echo":false,"script":null)
+]
+}
+jump={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"unicode":0,"echo":false,"script":null)
+]
+}
+run={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"unicode":0,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+3d_physics/layer_1="player"
+3d_physics/layer_2="word"
+3d_physics/layer_3="enemy"

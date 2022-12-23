@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi84i8fq0pkqa"]
+
+[ext_resource type="Script" path="res://scrits/UI/debug/state_label.gd" id="1_qirua"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="DebugInfos" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DebugInfos"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -40.0
+offset_right = 124.0
+grow_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="DebugInfos/HBoxContainer"]
+layout_mode = 2
+text = "State:"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="DebugInfos/HBoxContainer"]
+layout_mode = 2
+text = "State"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("1_qirua")

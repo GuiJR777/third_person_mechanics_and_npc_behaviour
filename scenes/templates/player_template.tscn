@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb7hatpxsukvy"]
+
+[ext_resource type="Script" path="res://scrits/templates/player_template.gd" id="1_o8umo"]
+[ext_resource type="Script" path="res://scrits/templates/spring_arm3D.gd" id="2_ktg1s"]
+[ext_resource type="Script" path="res://scrits/state_machine/state_machine.gd" id="3_vgqiu"]
+
+[node name="PlayerTemplate" type="CharacterBody3D" node_paths=PackedStringArray("pivot", "spring_arm", "floor_checker", "animation_tree", "state_machine")]
+script = ExtResource("1_o8umo")
+pivot = NodePath("Pivot")
+spring_arm = NodePath("SpringArm3D")
+floor_checker = NodePath("FloorChecker")
+animation_tree = NodePath("AnimationTree")
+state_machine = NodePath("StateMachine")
+
+[node name="Pivot" type="Marker3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+spring_length = 7.0
+script = ExtResource("2_ktg1s")
+mouse_sensivity = 0.01
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+
+[node name="FloorChecker" type="RayCast3D" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_vgqiu")
