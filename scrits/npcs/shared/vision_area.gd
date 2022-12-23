@@ -8,7 +8,7 @@ signal lost_sight_of
 @onready var periferical_vision_ray: RayCast3D = get_node("PerifericalVisionRay")
 @onready var focus: RayCast3D = get_node("Focus")
 @onready var focus_animation: AnimationPlayer = get_node("Focus/AnimationPlayer")
-@onready var npc: EnemyTemplate = owner
+@onready var npc := owner
 
 var bodie_in_periferical_vision: bool = false
 var has_a_point_of_interest: bool = false
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	__try_focus_on_body()
 	__search_player()
 	has_a_target = npc.target != null
-	has_a_point_of_interest = npc.point_of_interest != Vector3.ZERO
+	has_a_point_of_interest = point_of_interest != Vector3.ZERO
 
 	if not has_a_point_of_interest:
 		focus_animation.play("idle")
